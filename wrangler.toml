@@ -2,8 +2,8 @@ name = "profanity-check-id-v2"
 compatibility_date = "2024-08-01"
 
 [vars]
-UPSTASH_VECTOR_REST_URL="https://crucial-goat-8163-us1-vector.upstash.io"
-UPSTASH_VECTOR_REST_TOKEN="ABUFMGNydWNpYWwtZ29hdC04MTYzLXVzMWFkbWluTmpNMk1EbGxNMkl0WVRobE15MDBNVGxpTFRnMVl6QXRORE5qTTJZNFlqSmtOR1po"
+UPSTASH_VECTOR_REST_URL=""
+UPSTASH_VECTOR_REST_TOKEN=""
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
