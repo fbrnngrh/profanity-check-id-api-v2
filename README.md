@@ -2,15 +2,14 @@
 
 ## Overview
 
-The Profanity Checking (Indonesia) API provides a service to detect and filter profane words in Indonesian text. This API is designed to help developers create safer and more family-friendly content by identifying and optionally censoring inappropriate language.
+The Profanity Checking (Indonesia) API detects and filters profane words in Indonesian text. Helps create safer, family-friendly content.
 
 ### Version: 2.0.0
-
 ### Base URL: [https://api.profanity-check-id.com/v2](https://api.profanity-check-id.com/v2)
 
 ## Authentication
 
-All API requests require the use of an API key. To authenticate, include the API key in the `X-API-Key` header:
+Use API key in `X-API-Key` header:
 
 ```
 X-API-Key: your_api_key_here
@@ -20,41 +19,42 @@ X-API-Key: your_api_key_here
 
 ### Check Text for Profanity
 
-Analyzes the provided text for profane words and returns the results.
+Analyzes text for profane words.
 
 - **URL**: `/check`
 - **Method**: `POST`
 - **Content-Type**: `application/json`
 
-### Request Body
+#### Request Body
 
-| Field | Type | Required | Description |
-| ----- | ----- | ----- | ----- |
-| text | string | Yes | The text to be checked for profanity |
+| Field | Type   | Required | Description                  |
+|-------|--------|----------|------------------------------|
+| text  | string | Yes      | Text to check for profanity  |
 
-### Response
+#### Response
 
 - **Status Code**: 200 OK
 - **Content-Type**: `application/json`
-| Field | Type | Description |
-| ----- | ----- | ----- |
-| contains_profanity | boolean | Indicates if profanity was found |
-| profanity_count | integer | Number of profane words found |
-| profanities | array | List of profane words found |
-| censored_text | string | Original text with profanities censored |
-| message | string |  |
-| overal severity | number |  |
 
-### Example Request
+| Field              | Type    | Description                               |
+|--------------------|---------|-------------------------------------------|
+| contains_profanity | boolean | Indicates if profanity found              |
+| profanity_count    | integer | Number of profane words found             |
+| profanities        | array   | List of profane words found               |
+| censored_text      | string  | Original text with profanities censored   |
+| message            | string  | Human-readable message about the result   |
+| overall_severity   | number  | Severity score of the profanity detected  |
+
+#### Example Request
 
 ```json
 POST /check
 {
-  "text": "Dasar anjing, kamu brengsek!",
+  "text": "Dasar anjing, kamu brengsek!"
 }
 ```
 
-### Example Response
+#### Example Response
 
 ```json
 {
@@ -64,7 +64,7 @@ POST /check
         "profanity_count": 1,
         "profanities": [
             {
-                "word": "b4ngs4t",
+                "word": "b4ngs4t"
             }
         ],
         "censored_text": "dia sangat baik hati ******* sekali",
@@ -81,28 +81,30 @@ Retrieves the list of profane words used by the API.
 - **URL**: `/profanity-list`
 - **Method**: `GET`
 
-### Query Parameters
+#### Query Parameters
 
 | Parameter | Type | Required | Description |
-| ----- | ----- | ----- | ----- |
-| page |  | No |  |
-| limit |  | No |  |
+|-----------|-------|-----------|-------------|
+| page      |      | No        | Page number  |
+| limit     |      | No        | Items per page |
 
-### Response
+#### Response
 
 - **Status Code**: 200 OK
 - **Content-Type**: `application/json`
-| Field | Type | Description |
-| ----- | ----- | ----- |
-| words | array | List of profane words |
 
-### Example Request
+| Field            | Type     | Description                |
+|------------------|----------|----------------------------|
+| profanity_words  | array    | List of profane words      |
+| pagination      | object   | Pagination metadata       |
+
+#### Example Request
 
 ```
 GET /profanity-list?page=1&limit=15
 ```
 
-### Example Response
+#### Example Response
 
 ```json
 {
@@ -112,15 +114,15 @@ GET /profanity-list?page=1&limit=15
         "profanity_words": [
             {
                 "id": 1,
-                "word": "alay",
-            },
+                "word": "alay"
+            }
         ],
         "pagination": {
             "total_items": 21,
             "total_pages": 2,
             "current_page": 1,
             "items_per_page": 15
-        },
+        }
     }
 }
 ```
@@ -128,13 +130,13 @@ GET /profanity-list?page=1&limit=15
 ## Error Responses
 
 | Status Code | Description |
-| ----- | ----- |
-| 400 | Bad Request - Invalid input parameters |
-| 401 | Unauthorized - Invalid or missing API key |
-| 429 | Too Many Requests - Rate limit exceeded |
-| 500 | Internal Server Error - Something went wrong on the server |
+|-------------|-------------|
+| 400         | Bad Request - Invalid input parameters |
+| 401         | Unauthorized - Invalid or missing API key |
+| 429         | Too Many Requests - Rate limit exceeded  |
+| 500         | Internal Server Error - Something went wrong on the server |
 
-### Error Response Body
+#### Error Response Body
 
 ```json
 {
